@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://holiday-house-zoki.vercel.app/sitemap.xml
