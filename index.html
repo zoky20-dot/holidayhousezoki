@@ -481,6 +481,7 @@
       backdrop-filter: blur(8px);
     }
     .lightbox-arrow:hover { background: rgba(255,255,255,.24); }
+    .lightbox-arrows-hidden .lightbox-arrow { display: none !important; }
     .lightbox-arrow.prev { left: 24px; }
     .lightbox-arrow.next { right: 24px; }
 
@@ -775,7 +776,7 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
 <div id="lightbox" onclick="closeLightbox()">
 <span class="close">×</span>
 <button aria-label="Prethodna fotografija" class="lightbox-arrow prev" onclick="showPrevImage(event)">‹</button>
-<img alt="" id="lightboxImage" src=""/>
+<img alt="" id="lightboxImage" src="" onclick="toggleLightboxArrows(event)"/>
 <button aria-label="Sljedeća fotografija" class="lightbox-arrow next" onclick="showNextImage(event)">›</button>
 </div>
 <script>
@@ -829,11 +830,14 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
     ];
     let currentLightboxImages = galleryImages;
     let currentLightboxIndex = -1;
+    let lightboxArrowsVisible = true;
     function openLightbox(src) {
       currentLightboxImages = galleryImages;
       currentLightboxIndex = currentLightboxImages.indexOf(src);
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightbox').style.display = 'flex';
+      lightboxArrowsVisible = true;
+      document.getElementById('lightbox').classList.remove('lightbox-arrows-hidden');
       updateLightboxArrows();
     }
     function openLocationLightbox(src) {
@@ -841,13 +845,22 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
       currentLightboxIndex = currentLightboxImages.indexOf(src);
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightbox').style.display = 'flex';
+      lightboxArrowsVisible = true;
+      document.getElementById('lightbox').classList.remove('lightbox-arrows-hidden');
       updateLightboxArrows();
     }
     function updateLightboxArrows() {
-      const showArrows = currentLightboxIndex > -1 && currentLightboxImages.length > 1;
+      const showArrows = lightboxArrowsVisible && currentLightboxIndex > -1 && currentLightboxImages.length > 1;
       document.querySelectorAll('.lightbox-arrow').forEach(function(button) {
         button.style.display = showArrows ? 'flex' : 'none';
       });
+    }
+    function toggleLightboxArrows(event) {
+      if (event) event.stopPropagation();
+      if (currentLightboxIndex < 0 || currentLightboxImages.length <= 1) return;
+      lightboxArrowsVisible = !lightboxArrowsVisible;
+      document.getElementById('lightbox').classList.toggle('lightbox-arrows-hidden', !lightboxArrowsVisible);
+      updateLightboxArrows();
     }
     function showPrevImage(event) {
       if (event) event.stopPropagation();
@@ -866,6 +879,8 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
       document.getElementById('lightboxImage').src = '';
       currentLightboxImages = galleryImages;
       currentLightboxIndex = -1;
+      lightboxArrowsVisible = true;
+      document.getElementById('lightbox').classList.remove('lightbox-arrows-hidden');
       updateLightboxArrows();
     }
     document.addEventListener('keydown', function(e) {
