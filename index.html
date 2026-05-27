@@ -461,6 +461,28 @@
       cursor: pointer;
       z-index: 1000;
     }
+    .lightbox-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.14);
+      color: white;
+      font-size: 42px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox-arrow:hover { background: rgba(255,255,255,.24); }
+    .lightbox-arrow.prev { left: 24px; }
+    .lightbox-arrow.next { right: 24px; }
 
     @media (max-width: 960px) {
       .mobile-menu-btn { display: inline-flex; }
@@ -507,6 +529,13 @@
       .feature-list, .gallery-grid, .location-photos { grid-template-columns: 1fr; }
       .gallery-card, .location-photo { min-height: 255px; }
       .hero-actions { gap: 10px; }
+      .lightbox-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 34px;
+      }
+      .lightbox-arrow.prev { left: 10px; }
+      .lightbox-arrow.next { right: 10px; }
     }
   </style>
 <meta content="XUUoMHUWznABGo5xkjisbjYTYTFUi028fbE2vd6UmEo" name="google-site-verification"/>
@@ -623,6 +652,7 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
 <button aria-label="Otvori fotografiju" class="gallery-card" onclick="openLightbox('images/11-kitchen-dining.jpg')"><img alt="" src="images/11-kitchen-dining.jpg"/></button>
 <button aria-label="Otvori fotografiju" class="gallery-card" onclick="openLightbox('images/12-bathroom.jpg')"><img alt="" src="images/12-bathroom.jpg"/></button>
 <button aria-label="Otvori fotografiju" class="gallery-card" onclick="openLightbox('images/13-yard.jpg')"><img alt="" src="images/13-yard.jpg"/></button>
+<button aria-label="Otvori fotografiju" class="gallery-card" onclick="openLightbox('images/25-gallery-exterior-road.png')"><img alt="" src="images/25-gallery-exterior-road.png"/></button>
 </div>
 </div>
 </section>
@@ -744,7 +774,9 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
 </footer>
 <div id="lightbox" onclick="closeLightbox()">
 <span class="close">×</span>
+<button aria-label="Prethodna fotografija" class="lightbox-arrow prev" onclick="showPrevImage(event)">‹</button>
 <img alt="" id="lightboxImage" src=""/>
+<button aria-label="Sljedeća fotografija" class="lightbox-arrow next" onclick="showNextImage(event)">›</button>
 </div>
 <script>
     function toggleMenu() {
@@ -768,16 +800,63 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
       document.getElementById('hrBtn').classList.toggle('active', lang === 'hr');
       document.getElementById('enBtn').classList.toggle('active', lang === 'en');
     }
+    const galleryImages = [
+      'images/01-exterior-front.jpg',
+      'images/02-exterior-side.jpg',
+      'images/03-living-room-main.jpg',
+      'images/17-living-dining-new.jpg',
+      'images/23-gallery-living-gallery.jpg',
+      'images/04-living-dining-one.jpg',
+      'images/05-living-dining-two.jpg',
+      'images/06-bedroom-main.jpg',
+      'images/07-bedroom-wood.jpg',
+      'images/08-bedroom-loft-one.jpg',
+      'images/09-bedroom-loft-two.jpg',
+      'images/24-gallery-bedroom-stairs.png',
+      'images/18-bedroom-loft-three.jpg',
+      'images/10-kitchen.jpg',
+      'images/11-kitchen-dining.jpg',
+      'images/12-bathroom.jpg',
+      'images/13-yard.jpg',
+      'images/25-gallery-exterior-road.png'
+    ];
+    let currentLightboxIndex = -1;
     function openLightbox(src) {
+      currentLightboxIndex = galleryImages.indexOf(src);
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightbox').style.display = 'flex';
+      updateLightboxArrows();
+    }
+    function updateLightboxArrows() {
+      const showArrows = currentLightboxIndex > -1 && galleryImages.length > 1;
+      document.querySelectorAll('.lightbox-arrow').forEach(function(button) {
+        button.style.display = showArrows ? 'flex' : 'none';
+      });
+    }
+    function showPrevImage(event) {
+      if (event) event.stopPropagation();
+      if (currentLightboxIndex < 0) return;
+      currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightboxImage').src = galleryImages[currentLightboxIndex];
+    }
+    function showNextImage(event) {
+      if (event) event.stopPropagation();
+      if (currentLightboxIndex < 0) return;
+      currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
+      document.getElementById('lightboxImage').src = galleryImages[currentLightboxIndex];
     }
     function closeLightbox() {
       document.getElementById('lightbox').style.display = 'none';
       document.getElementById('lightboxImage').src = '';
+      currentLightboxIndex = -1;
+      updateLightboxArrows();
     }
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { closeLightbox(); closeMenu(); }
+      if (document.getElementById('lightbox').style.display === 'flex') {
+        if (e.key === 'ArrowLeft') showPrevImage(e);
+        if (e.key === 'ArrowRight') showNextImage(e);
+      }
     });
   </script>
 </body>
