@@ -481,9 +481,58 @@
       backdrop-filter: blur(8px);
     }
     .lightbox-arrow:hover { background: rgba(255,255,255,.24); }
-    .lightbox-arrows-hidden .lightbox-arrow { display: none !important; }
     .lightbox-arrow.prev { left: 24px; }
     .lightbox-arrow.next { right: 24px; }
+
+    .phone-menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.42);
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .phone-menu-box {
+      width: min(360px, 100%);
+      border-radius: 24px;
+      background: rgba(255,250,245,.98);
+      box-shadow: 0 24px 70px rgba(0,0,0,.28);
+      border: 1px solid rgba(123,87,56,.18);
+      padding: 22px;
+      text-align: center;
+    }
+    .phone-menu-box h3 {
+      color: var(--green);
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+    .phone-menu-box p {
+      color: var(--muted);
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+    .phone-menu-actions {
+      display: grid;
+      gap: 10px;
+    }
+    .phone-menu-actions .btn { width: 100%; }
+    .whatsapp-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      flex: 0 0 auto;
+    }
+    .phone-menu-close {
+      margin-top: 10px;
+      background: transparent;
+      border: 0;
+      color: var(--muted);
+      font-weight: 900;
+      cursor: pointer;
+      padding: 8px;
+    }
 
     @media (max-width: 960px) {
       .mobile-menu-btn { display: inline-flex; }
@@ -581,7 +630,7 @@
 <a href="#house-rules" onclick="closeMenu()"><span data-hr="">Kućni red</span><span data-en="">House Rules</span></a>
 </nav>
 <div class="nav-right">
-<a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nada.valentic164%40gmail.com&amp;su=Upit%20za%20rezervaciju%20-%20Holiday%20House%20Zoki&amp;body=Pozdrav%2C%0A%0AZanima%20me%20dostupnost%20smje%C5%A1taja%20Holiday%20House%20Zoki.%0A%0ATermin%3A%0ABroj%20gostiju%3A%0A%0AHvala." rel="noopener" target="_blank"><span data-hr="">Rezerviraj</span><span data-en="">Book now</span></a>
+<a class="btn btn-primary inquiry-email-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nada.valentic164%40gmail.com&amp;su=Upit%20za%20rezervaciju%20-%20Holiday%20House%20Zoki&amp;body=Pozdrav%2C%0A%0AZanima%20me%20dostupnost%20smje%C5%A1taja%20Holiday%20House%20Zoki.%0A%0ATermin%3A%0ABroj%20gostiju%3A%0A%0AHvala." rel="noopener" target="_blank"><span data-hr="">Rezerviraj</span><span data-en="">Book now</span></a>
 <button class="lang-btn active" id="hrBtn" onclick="setLang('hr')">HR</button>
 <button class="lang-btn" id="enBtn" onclick="setLang('en')">EN</button>
 </div>
@@ -593,8 +642,8 @@
 <h1 data-hr="">Uživajte u miru, privatnosti i udobnosti</h1>
 <h1 data-en="">Enjoy peace, privacy and comfort</h1>
 <div class="hero-actions">
-<a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nada.valentic164%40gmail.com&amp;su=Upit%20za%20rezervaciju%20-%20Holiday%20House%20Zoki&amp;body=Pozdrav%2C%0A%0AZanima%20me%20dostupnost%20smje%C5%A1taja%20Holiday%20House%20Zoki.%0A%0ATermin%3A%0ABroj%20gostiju%3A%0A%0AHvala." rel="noopener" target="_blank"><span data-hr="">Pošalji upit</span><span data-en="">Send inquiry</span></a>
-<a class="btn btn-light" href="tel:+385994022624">+385 99 402 2624</a>
+<a class="btn btn-primary inquiry-email-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nada.valentic164%40gmail.com&amp;su=Upit%20za%20rezervaciju%20-%20Holiday%20House%20Zoki&amp;body=Pozdrav%2C%0A%0AZanima%20me%20dostupnost%20smje%C5%A1taja%20Holiday%20House%20Zoki.%0A%0ATermin%3A%0ABroj%20gostiju%3A%0A%0AHvala." rel="noopener" target="_blank"><span data-hr="">Pošalji upit</span><span data-en="">Send inquiry</span></a>
+<button class="btn btn-light" type="button" onclick="openPhoneMenu()">+385 99 402 2624</button>
 <a class="btn btn-light" href="https://www.booking.com/Share-orZxyT9" rel="noopener" target="_blank">
 <span data-hr="">Rezerviraj na Bookingu</span>
 <span data-en="">Book on Booking</span>
@@ -758,8 +807,8 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
 <p data-en="" style="margin-top:14px">For availability and booking, send an e-mail or call the host.</p>
 </div>
 <div class="hero-actions">
-<a class="btn btn-light" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nada.valentic164%40gmail.com&amp;su=Upit%20za%20rezervaciju%20-%20Holiday%20House%20Zoki&amp;body=Pozdrav%2C%0A%0AZanima%20me%20dostupnost%20smje%C5%A1taja%20Holiday%20House%20Zoki.%0A%0ATermin%3A%0ABroj%20gostiju%3A%0A%0AHvala." rel="noopener" target="_blank">nada.valentic164@gmail.com</a>
-<a class="btn btn-light" href="tel:+385994022624">+385 99 402 2624</a>
+<a class="btn btn-light inquiry-email-link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nada.valentic164%40gmail.com&amp;su=Upit%20za%20rezervaciju%20-%20Holiday%20House%20Zoki&amp;body=Pozdrav%2C%0A%0AZanima%20me%20dostupnost%20smje%C5%A1taja%20Holiday%20House%20Zoki.%0A%0ATermin%3A%0ABroj%20gostiju%3A%0A%0AHvala." rel="noopener" target="_blank">nada.valentic164@gmail.com</a>
+<button class="btn btn-light" type="button" onclick="openPhoneMenu()">+385 99 402 2624</button>
 </div>
 </div>
 <div class="contact-card">
@@ -773,13 +822,40 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
 <footer>
 <div class="container"><span data-hr="">© 2026 Holiday House Zoki<br/>Made by V Digital</span><span data-en="">© 2026 Holiday House Zoki<br/>Made by V Digital</span></div>
 </footer>
+
+<div class="phone-menu-overlay" id="phoneMenu" onclick="closePhoneMenu()">
+<div class="phone-menu-box" onclick="event.stopPropagation()">
+<h3>Kontakt telefonom</h3>
+<p>Odaberite način kontakta</p>
+<div class="phone-menu-actions">
+<a class="btn btn-primary" href="tel:+385994022624">Zovi</a>
+<a class="btn btn-light" href="https://wa.me/385994022624?text=Pozdrav%2C%20zanima%20me%20dostupnost%20smje%C5%A1taja%20Holiday%20House%20Zoki." rel="noopener" target="_blank">
+<svg aria-hidden="true" class="whatsapp-icon" viewBox="0 0 32 32">
+<circle cx="16" cy="16" fill="#25D366" r="15"></circle>
+<path d="M22.8 18.9c-.4-.2-2.3-1.1-2.6-1.2-.4-.1-.6-.2-.9.2-.3.4-1 1.2-1.2 1.4-.2.3-.5.3-.9.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.7c-.3 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.4 3.6 1.5 3.8c.2.3 2.7 4.1 6.5 5.7.9.4 1.6.6 2.2.8.9.3 1.7.2 2.4.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.2-.8-.4z" fill="#fff"></path>
+</svg>
+WhatsApp
+</a>
+</div>
+<button class="phone-menu-close" type="button" onclick="closePhoneMenu()">Zatvori</button>
+</div>
+</div>
 <div id="lightbox" onclick="closeLightbox()">
 <span class="close">×</span>
 <button aria-label="Prethodna fotografija" class="lightbox-arrow prev" onclick="showPrevImage(event)">‹</button>
-<img alt="" id="lightboxImage" src="" onclick="toggleLightboxArrows(event)"/>
+<img alt="" id="lightboxImage" src=""/>
 <button aria-label="Sljedeća fotografija" class="lightbox-arrow next" onclick="showNextImage(event)">›</button>
 </div>
 <script>
+
+    function openPhoneMenu() {
+      const menu = document.getElementById('phoneMenu');
+      if (menu) menu.style.display = 'flex';
+    }
+    function closePhoneMenu() {
+      const menu = document.getElementById('phoneMenu');
+      if (menu) menu.style.display = 'none';
+    }
     function toggleMenu() {
       const menu = document.getElementById('mainMenu');
       const btn = document.getElementById('mobileMenuBtn');
@@ -801,6 +877,27 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
       document.getElementById('hrBtn').classList.toggle('active', lang === 'hr');
       document.getElementById('enBtn').classList.toggle('active', lang === 'en');
     }
+
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 760;
+    }
+    function openMobileGmail(event) {
+      if (!isMobileDevice()) return;
+      event.preventDefault();
+      const to = 'nada.valentic164@gmail.com';
+      const subject = 'Upit za smještaj - Holiday House Zoki';
+      const body = 'Pozdrav,\n\nZanima me dostupnost smještaja Holiday House Zoki.\n\nTermin:\nBroj gostiju:\n\nHvala.';
+      const gmailAppUrl = 'googlegmail://co?to=' + encodeURIComponent(to) + '&subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      const mailtoUrl = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+      window.location.href = gmailAppUrl;
+      setTimeout(function() {
+        window.location.href = mailtoUrl;
+      }, 700);
+    }
+    document.querySelectorAll('.inquiry-email-link').forEach(function(link) {
+      link.addEventListener('click', openMobileGmail);
+    });
     const galleryImages = [
       'images/01-exterior-front.jpg',
       'images/05-living-dining-two.jpg',
@@ -830,14 +927,11 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
     ];
     let currentLightboxImages = galleryImages;
     let currentLightboxIndex = -1;
-    let lightboxArrowsVisible = true;
     function openLightbox(src) {
       currentLightboxImages = galleryImages;
       currentLightboxIndex = currentLightboxImages.indexOf(src);
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightbox').style.display = 'flex';
-      lightboxArrowsVisible = true;
-      document.getElementById('lightbox').classList.remove('lightbox-arrows-hidden');
       updateLightboxArrows();
     }
     function openLocationLightbox(src) {
@@ -845,22 +939,13 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
       currentLightboxIndex = currentLightboxImages.indexOf(src);
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightbox').style.display = 'flex';
-      lightboxArrowsVisible = true;
-      document.getElementById('lightbox').classList.remove('lightbox-arrows-hidden');
       updateLightboxArrows();
     }
     function updateLightboxArrows() {
-      const showArrows = lightboxArrowsVisible && currentLightboxIndex > -1 && currentLightboxImages.length > 1;
+      const showArrows = currentLightboxIndex > -1 && currentLightboxImages.length > 1;
       document.querySelectorAll('.lightbox-arrow').forEach(function(button) {
         button.style.display = showArrows ? 'flex' : 'none';
       });
-    }
-    function toggleLightboxArrows(event) {
-      if (event) event.stopPropagation();
-      if (currentLightboxIndex < 0 || currentLightboxImages.length <= 1) return;
-      lightboxArrowsVisible = !lightboxArrowsVisible;
-      document.getElementById('lightbox').classList.toggle('lightbox-arrows-hidden', !lightboxArrowsVisible);
-      updateLightboxArrows();
     }
     function showPrevImage(event) {
       if (event) event.stopPropagation();
@@ -879,12 +964,10 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
       document.getElementById('lightboxImage').src = '';
       currentLightboxImages = galleryImages;
       currentLightboxIndex = -1;
-      lightboxArrowsVisible = true;
-      document.getElementById('lightbox').classList.remove('lightbox-arrows-hidden');
       updateLightboxArrows();
     }
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') { closeLightbox(); closeMenu(); }
+      if (e.key === 'Escape') { closeLightbox(); closeMenu(); closePhoneMenu(); }
       if (document.getElementById('lightbox').style.display === 'flex') {
         if (e.key === 'ArrowLeft') showPrevImage(e);
         if (e.key === 'ArrowRight') showNextImage(e);
