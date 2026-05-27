@@ -699,11 +699,11 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
 </div>
 <div class="location-photos">
 
-<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLightbox('images/21-location-forest-road.jpg')"><img alt="" src="images/21-location-forest-road.jpg"/></button>
-<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLightbox('images/22-location-nature-meadow.jpg')"><img alt="" src="images/22-location-nature-meadow.jpg"/></button>
-<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLightbox('images/14-nature.jpg')"><img alt="" src="images/14-nature.jpg"/></button>
-<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLightbox('images/15-vineyard.jpg')"><img alt="" src="images/15-vineyard.jpg"/></button>
-<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLightbox('images/19-surroundings.jpg')"><img alt="" src="images/19-surroundings.jpg"/></button>
+<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLocationLightbox('images/21-location-forest-road.jpg')"><img alt="" src="images/21-location-forest-road.jpg"/></button>
+<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLocationLightbox('images/22-location-nature-meadow.jpg')"><img alt="" src="images/22-location-nature-meadow.jpg"/></button>
+<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLocationLightbox('images/14-nature.jpg')"><img alt="" src="images/14-nature.jpg"/></button>
+<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLocationLightbox('images/15-vineyard.jpg')"><img alt="" src="images/15-vineyard.jpg"/></button>
+<button aria-label="Otvori fotografiju" class="location-photo" onclick="openLocationLightbox('images/19-surroundings.jpg')"><img alt="" src="images/19-surroundings.jpg"/></button>
 </div>
 <div class="map-wrap">
 <iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Holiday%20House%20Zoki%20Tavani%2065%20Zbjegova%C4%8Da%20Kutina&amp;output=embed"></iframe>
@@ -820,15 +820,31 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
       'images/25-gallery-exterior-road.png',
       'images/02-exterior-side.jpg'
     ];
+    const locationImages = [
+      'images/21-location-forest-road.jpg',
+      'images/22-location-nature-meadow.jpg',
+      'images/14-nature.jpg',
+      'images/15-vineyard.jpg',
+      'images/19-surroundings.jpg'
+    ];
+    let currentLightboxImages = galleryImages;
     let currentLightboxIndex = -1;
     function openLightbox(src) {
-      currentLightboxIndex = galleryImages.indexOf(src);
+      currentLightboxImages = galleryImages;
+      currentLightboxIndex = currentLightboxImages.indexOf(src);
+      document.getElementById('lightboxImage').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+      updateLightboxArrows();
+    }
+    function openLocationLightbox(src) {
+      currentLightboxImages = locationImages;
+      currentLightboxIndex = currentLightboxImages.indexOf(src);
       document.getElementById('lightboxImage').src = src;
       document.getElementById('lightbox').style.display = 'flex';
       updateLightboxArrows();
     }
     function updateLightboxArrows() {
-      const showArrows = currentLightboxIndex > -1 && galleryImages.length > 1;
+      const showArrows = currentLightboxIndex > -1 && currentLightboxImages.length > 1;
       document.querySelectorAll('.lightbox-arrow').forEach(function(button) {
         button.style.display = showArrows ? 'flex' : 'none';
       });
@@ -836,18 +852,19 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
     function showPrevImage(event) {
       if (event) event.stopPropagation();
       if (currentLightboxIndex < 0) return;
-      currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
-      document.getElementById('lightboxImage').src = galleryImages[currentLightboxIndex];
+      currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+      document.getElementById('lightboxImage').src = currentLightboxImages[currentLightboxIndex];
     }
     function showNextImage(event) {
       if (event) event.stopPropagation();
       if (currentLightboxIndex < 0) return;
-      currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
-      document.getElementById('lightboxImage').src = galleryImages[currentLightboxIndex];
+      currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+      document.getElementById('lightboxImage').src = currentLightboxImages[currentLightboxIndex];
     }
     function closeLightbox() {
       document.getElementById('lightbox').style.display = 'none';
       document.getElementById('lightboxImage').src = '';
+      currentLightboxImages = galleryImages;
       currentLightboxIndex = -1;
       updateLightboxArrows();
     }
