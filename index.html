@@ -404,7 +404,7 @@
 
     .house-rules-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 16px;
     }
     .rule-card {
@@ -413,33 +413,50 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 210px;
+      min-height: 220px;
+      padding: 30px 20px;
     }
     .rule-icon {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       background: linear-gradient(135deg, rgba(36,64,43,.10), rgba(123,75,30,.08));
       color: var(--green);
-      font-size: 1.85rem;
+      font-size: 1.7rem;
       box-shadow: 0 8px 24px rgba(21,34,25,.10);
       border: 1px solid rgba(184,144,42,.14);
     }
+    .video-icon {
+      background: rgba(255,255,255,.82);
+      color: var(--green);
+      border-color: rgba(61,114,80,.24);
+    }
+    .video-icon svg {
+      width: 34px;
+      height: 34px;
+      display: block;
+    }
+
     .rule-card h3 {
       font-family: 'Cormorant Garamond', Georgia, serif;
       color: var(--green);
-      font-size: 1.28rem;
+      font-size: 1.22rem;
       font-weight: 700;
       margin-bottom: 8px;
     }
     .rule-card p {
       color: var(--muted);
       font-weight: 600;
-      font-size: .96rem;
+      font-size: .92rem;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 1100px) and (min-width: 961px) {
+      .house-rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     .contact-section {
@@ -655,7 +672,8 @@
         background: linear-gradient(135deg, rgba(36,64,43,.08), rgba(123,75,30,.06));
         border: 1px solid rgba(184,144,42,.08);
       }
-      .about-grid, .amenities, .contact-grid, .location-intro, .house-rules-grid { grid-template-columns: 1fr; }
+      .about-grid, .amenities, .contact-grid, .location-intro { grid-template-columns: 1fr; }
+      .house-rules-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .gallery-grid, .location-photos { grid-template-columns: 1fr 1fr; }
       .gallery-card:first-child { grid-row: span 1; min-height: 285px; }
       .location-photo:first-child { grid-column: span 1; min-height: 285px; }
@@ -673,7 +691,7 @@
       section { padding: 68px 0; }
       .section-head { display: block; }
       .section-head p { margin-top: 14px; }
-      .feature-list, .gallery-grid, .location-photos { grid-template-columns: 1fr; }
+      .feature-list, .gallery-grid, .location-photos, .house-rules-grid { grid-template-columns: 1fr; }
       .gallery-card, .location-photo { min-height: 255px; }
       .hero-actions { gap: 10px; }
       .lightbox-arrow {
@@ -890,6 +908,24 @@ Objekt spaja tradicionalni etno stil uređenja s modernom tehnologijom, stvaraju
 <h3 data-en="">Parties and events</h3>
 <p data-hr="">Nije dozvoljeno održavanje zabava i evenata.</p>
 <p data-en="">Parties and events are not allowed.</p>
+</div>
+<div class="card rule-card">
+<div class="rule-icon video-icon" aria-hidden="true">
+<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M15 27C15 24.7909 16.7909 23 19 23H40C42.2091 23 44 24.7909 44 27V35C44 37.2091 42.2091 39 40 39H19C16.7909 39 15 37.2091 15 35V27Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M44 29L54 24.5V37.5L44 33V29Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="28.5" cy="31" r="5" stroke="currentColor" stroke-width="3"/>
+  <circle cx="28.5" cy="31" r="1.8" fill="currentColor"/>
+  <path d="M22 39L17 47" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M17 47H31" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M47.5 18.5C50.5 20.2 52.8 22.8 54 26" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/>
+  <path d="M49.5 13.5C54.5 16.1 58.1 20.3 60 25.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" opacity="0.45"/>
+</svg>
+</div>
+<h3 data-hr="">Vanjski videonadzor</h3>
+<h3 data-en="">Outdoor video surveillance</h3>
+<p data-hr="">Objekt ima vanjski videonadzor radi zaštite osoba i imovine.</p>
+<p data-en="">The property has outdoor video surveillance for the protection of persons and property.</p>
 </div>
 </div>
 </div>
